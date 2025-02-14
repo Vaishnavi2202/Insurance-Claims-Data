@@ -10,8 +10,10 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 # Set the page layout to wide
 st.set_page_config(layout="wide")
 
-# Load the data (limit to first 1000 rows)
-data = pd.read_csv('Insurance_complaints__All_data.csv', nrows=100000)
+# Load the data from Google Drive
+file_id = '1-uHj-17MQA6_DuNT9DKKU17opybldZpJ'  # Replace with your actual file ID
+data_url = f'https://drive.google.com/uc?id={file_id}'
+data = pd.read_csv(data_url, nrows=100000)
 
 # Remove rows with null values
 data = data.dropna()
@@ -43,7 +45,7 @@ st.title('The Claim Game')
 #col1, col2 = st.columns(2)
 
 #with col1:
-    # Draw a graph for complaints filed against a specific column (assuming 'Complaint filed against' column exists)
+# Draw a graph for complaints filed against a specific column (assuming 'Complaint filed against' column exists)
 if 'Complaint filed against' in data.columns:
         st.write('### Agencies with the Most Complaints Filed Against Them:')
         top_10_complaints = data['Complaint filed against'].value_counts().nlargest(10).index
