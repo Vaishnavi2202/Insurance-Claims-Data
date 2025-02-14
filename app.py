@@ -134,6 +134,13 @@ if 'Complaint type' in data.columns:
 else:
     st.write('The column "Reason complaint filed" does not exist in the dataset.')
 
+# Display the top 10 highest "Complaints filed against" and the average number of days between received and closed dates
+st.write('### Top 10 Highest Complaints Filed Against and Average Days to Close:')
+top_10_complaints = data['Complaint filed against'].value_counts().nlargest(10).index
+avg_days_to_close = data[data['Complaint filed against'].isin(top_10_complaints)].groupby('Complaint filed against')['Days to Close'].mean().reset_index()
+avg_days_to_close.columns = ['Complaint Filed Against', 'Average Days to Close']
+st.write(avg_days_to_close)
+
 # Analyze the relationship between Complaint type and Coverage level
 if 'Complaint type' in data.columns and 'Coverage level' in data.columns:
     st.write('### Relationship between Complaint Type and Coverage Level:')
