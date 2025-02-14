@@ -16,7 +16,7 @@ data_url = f'https://drive.google.com/uc?id={file_id}'
 data = pd.read_csv(data_url, nrows=100000)
 
 # Remove rows with null values
-data = data.dropna()
+data = data.dropna().reset_index(drop=True)
 
 # Clean the 'Complaint filed against' column by converting all text to uppercase
 data['Complaint filed against'] = data['Complaint filed against'].str.upper()
