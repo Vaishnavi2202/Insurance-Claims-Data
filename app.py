@@ -94,7 +94,25 @@ if 'Complaint filed against' in data.columns:
 else:
         st.write('The column "Complaint filed against" does not exist in the dataset.')
 
-#with col2:
+# Draw a grouped bar chart for the top 10 highest "Complaints filed against" vs top 5 "Complaints filed by"
+if 'Complaint filed against' in data.columns and 'Complaint filed by' in data.columns:
+    st.write('### Top 10 Highest Complaints Filed Against vs Top 5 Complaints Filed By:')
+    top_10_complaints = data['Complaint filed against'].value_counts().nlargest(10).index
+    top_5_complaints_by = data['Complaint filed by'].value_counts().nlargest(5).index
+    filtered_data = data[data['Complaint filed against'].isin(top_10_complaints) & data['Complaint filed by'].isin(top_5_complaints_by)]
+    complaint_pivot = filtered_data.pivot_table(index='Complaint filed against', columns='Complaint filed by', aggfunc='size', fill_value=0)
+    fig, ax = plt.subplots(figsize=(14, 11))
+    complaint_pivot.plot(kind='bar', stacked=True, ax=ax, color=sns.color_palette('viridis', len(top_5_complaints_by)))
+    ax.set_title('Top 10 Highest Complaints Filed Against vs Top 5 Complaints Filed By', fontsize=16)
+    ax.set_xlabel('Complaint Filed Against', fontsize=14)
+    ax.set_ylabel('Number of Complaints', fontsize=14)
+    ax.tick_params(axis='y', labelsize=12)
+    ax.tick_params(axis='x', labelsize=12)
+    ax.legend(title='Complaint Filed By', bbox_to_anchor=(1.05, 1), loc='upper left')
+    st.pyplot(fig)
+else:
+    st.write('The columns "Complaint filed against" and/or "Complaint filed by" do not exist in the dataset.')
+
 # Draw a pie chart for complaints filed by a specific column (assuming 'Complaint filed by' column exists)
 if 'Complaint filed by' in data.columns:
         st.write('### Pie chart representing Complaints Filed By:')
