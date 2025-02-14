@@ -53,7 +53,7 @@ st.write('### Sample data from Original File:')
 st.write(data2.tail(20))
 # Display the number of "Yes" and "No" in the "Confirmed complaint" column
 if 'Confirmed complaint' in data2.columns:
-    st.write('### Number of Yes and No in Confirmed Complaint:')
+    st.write('### Confirmed Complaints counts:')
     confirmed_complaint_counts = data2['Confirmed complaint'].value_counts()
     st.write(confirmed_complaint_counts)
 else:
