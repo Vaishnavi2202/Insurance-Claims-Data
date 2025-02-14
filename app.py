@@ -15,6 +15,10 @@ file_id = '1-uHj-17MQA6_DuNT9DKKU17opybldZpJ'  # Replace with your actual file I
 data_url = f'https://drive.google.com/uc?id={file_id}'
 data = pd.read_csv(data_url, nrows=100000)
 
+# Drop the specified columns
+columns_to_drop = ['Complaint number', 'Confirmed complaint', 'Keywords', 'Others involved']
+data = data.drop(columns=columns_to_drop)
+
 # Remove rows with null values
 data = data.dropna().reset_index(drop=True)
 
