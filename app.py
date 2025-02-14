@@ -76,11 +76,11 @@ if 'Complaint filed against' in data.columns:
         st.write('### Companies with the Most Complaints Filed Against Them:')
         top_10_complaints = data['Complaint filed against'].value_counts().nlargest(10).index
         filtered_data = data[data['Complaint filed against'].isin(top_10_complaints)]
-        fig, ax = plt.subplots(figsize=(20, 20))
+        fig, ax = plt.subplots(figsize=(16, 16))
         sns.countplot(y='Complaint filed against', data=filtered_data, ax=ax, order=top_10_complaints, palette='viridis')
         #ax.set_title('Top 10 Most Complained-About Insurance Agencies', fontsize=20)
-        ax.set_xlabel('Number of Complaints', fontsize=18)
-        ax.set_ylabel('Complaint Filed Against', fontsize=18)
+        ax.set_xlabel('Number of Complaints', fontsize=15)
+        ax.set_ylabel('Complaint Filed Against', fontsize=15)
         ax.tick_params(axis='y', labelsize=16)
         ax.tick_params(axis='x', labelsize=16)
         for p in ax.patches:
