@@ -44,6 +44,7 @@ data['Month'] = data['Received date'].dt.month
 st.title('The Claim Game')
 st.write('### Sample data:')
 st.write(data2.head(20))
+st.write(data.head(5))
 
 st.write('### Shape of Data before data cleaning:')
 st.write(data2.shape)
