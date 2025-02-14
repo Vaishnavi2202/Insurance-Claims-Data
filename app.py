@@ -79,8 +79,7 @@ unique_counts = data1.nunique().reset_index()
 unique_counts.columns = ['Field','Count']
 st.write(unique_counts)
 
-st.markdown('<p style="font-size:18px;">If the data had a smaller number of categories for Reason Complaint filed, it would be easier to translate the analysis into actionable insights and targeted improvements. bet.</p>', unsafe_allow_html=True)
-
+st.markdown('<p style="font-size:18px;">If the data had a smaller number of categories for Reason Complaint filed, it would be easier to translate the analysis into actionable insights and targeted improvements.</p>', unsafe_allow_html=True)
 
 # Draw a graph for complaints filed against a specific column (assuming 'Complaint filed against' column exists)
 if 'Complaint filed against' in data.columns:
@@ -100,6 +99,10 @@ if 'Complaint filed against' in data.columns:
         st.pyplot(fig)
 else:
         st.write('The column "Complaint filed against" does not exist in the dataset.')
+
+st.markdown('<p style="font-size:18px;">We see that Progressive County Mutual Insurance Company followed by State Farm Mutual Automobile Insurance Company have highest complaints. 
+                                        We also see considerable number of complaints against Blue Cross and Blue Shield of Texas. </p>', unsafe_allow_html=True)
+
 
 # Draw a grouped bar chart for the top 10 highest "Complaints filed against" vs top 5 "Complaints filed by"
 if 'Complaint filed against' in data.columns and 'Complaint filed by' in data.columns:
