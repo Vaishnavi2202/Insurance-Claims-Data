@@ -34,7 +34,6 @@ data = data1.iloc[-50000:]
 # Clean the 'Complaint filed against' column by converting all text to uppercase
 data['Complaint filed against'] = data['Complaint filed against'].str.upper()
 
-
 # Convert date columns to datetime with the correct format
 data['Received date'] = pd.to_datetime(data['Received date'], format='%m/%d/%Y')
 data['Closed date'] = pd.to_datetime(data['Closed date'], format='%m/%d/%Y')
@@ -60,26 +59,11 @@ if 'Confirmed complaint' in data2.columns:
 else:
     st.write('The column "Confirmed complaint" does not exist in the dataset.')
 
-st.markdown('<p style="font-size:18px;">Notes:</p>', unsafe_allow_html=True)
-st.markdown('<p style="font-size:18px;">1. We observe unclean data in columns How Resolved and Reason for Complaint.</p>', unsafe_allow_html=True)
-st.markdown('<p style="font-size:18px;">2. The categories Others in Complaint Filed by and Miscellaneous in Coverage type lack specificity, making the data less precise and harder to analyze.</p>', unsafe_allow_html=True)
-st.markdown('<p style="font-size:18px;">3. Confirmed complaints are fewer than unconfirmed complaints.</p>', unsafe_allow_html=True)
-
-st.write('### Size of Raw Data:')
-st.write(data2.shape)
-
-st.write('### Data size after cleaning:')
-st.write(data.shape)
-
-st.markdown('<p style="font-size:18px;">Columns were eliminated if they contained more null values than valid data points. Additionally, rows with any null values were also removed.</p>', unsafe_allow_html=True)
-
 # Display the number of unique categories in each column
 st.write('### Number of Unique Categories in Each Column:')
 unique_counts = data1.nunique().reset_index()
 unique_counts.columns = ['Field','Count']
 st.write(unique_counts)
-
-st.markdown('<p style="font-size:18px;">If the data had a smaller number of categories for Reason Complaint filed, it would be easier to translate the analysis into actionable insights and targeted improvements.</p>', unsafe_allow_html=True)
 
 # Draw a graph for complaints filed against a specific column (assuming 'Complaint filed against' column exists)
 if 'Complaint filed against' in data.columns:
@@ -88,7 +72,7 @@ if 'Complaint filed against' in data.columns:
         filtered_data = data[data['Complaint filed against'].isin(top_10_complaints)]
         fig, ax = plt.subplots(figsize=(20, 20))
         sns.countplot(y='Complaint filed against', data=filtered_data, ax=ax, order=top_10_complaints, palette='viridis')
-        ax.set_title('Top 10 Most Complained-About Insurance Agencies', fontsize=20)
+        #ax.set_title('Top 10 Most Complained-About Insurance Agencies', fontsize=20)
         ax.set_xlabel('Number of Complaints', fontsize=18)
         ax.set_ylabel('Complaint Filed Against', fontsize=18)
         ax.tick_params(axis='y', labelsize=16)
@@ -99,10 +83,6 @@ if 'Complaint filed against' in data.columns:
         st.pyplot(fig)
 else:
         st.write('The column "Complaint filed against" does not exist in the dataset.')
-
-st.markdown('<p style="font-size:18px;">We see that Progressive County Mutual Insurance Company followed by State Farm Mutual Automobile Insurance Company have highest complaints.</p>', unsafe_allow_html=True)
-st.markdown('<p style="font-size:18px;">We also see considerable number of complaints against Blue Cross and Blue Shield of Texas. </p>', unsafe_allow_html=True)
-
 
 # Draw a grouped bar chart for the top 10 highest "Complaints filed against" vs top 5 "Complaints filed by"
 if 'Complaint filed against' in data.columns and 'Complaint filed by' in data.columns:
@@ -122,11 +102,6 @@ if 'Complaint filed against' in data.columns and 'Complaint filed by' in data.co
     st.pyplot(fig)
 else:
     st.write('The columns "Complaint filed against" and/or "Complaint filed by" do not exist in the dataset.')
-
-st.markdown('<p style="font-size:18px;">Notes:</p>', unsafe_allow_html=True)
-st.markdown('<p style="font-size:18px;">1. Insured and Third Party are consistently significant sources of complaints across most companies. The dark blue (Insured) and light green (Third Party) segments of the bars are generally quite prominent for almost all companies, indicating these two groups are major drivers of complaints.</p>', unsafe_allow_html=True)
-st.markdown('<p style="font-size:18px;">2. Attorney and Other categories appear to be the smallest contributors to complaints.</p>', unsafe_allow_html=True)
-st.markdown('<p style="font-size:18px;">3. Blue Cross and Blue Shield of Texas: Seems to have a particularly high proportion of Provider complaints compared to some other companies, suggesting potential issues related to provider relationships or claims processing.</p>', unsafe_allow_html=True)
 
 # Draw a grouped bar chart for the column 'Complaint Type' (assuming it exists)
 if 'Complaint type' in data.columns:
@@ -176,7 +151,6 @@ if 'Complaint filed against' in data.columns and 'Coverage type' in data.columns
     st.pyplot(fig)
 else:
     st.write('The columns "Complaint filed against" and/or "Coverage type" do not exist in the dataset.')
-
 
 # Analyze the relationship between Complaint type and Coverage level
 if 'Complaint type' in data.columns and 'Coverage level' in data.columns:
