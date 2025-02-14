@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib.colors import LinearSegmentedColormap
 import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
@@ -165,7 +166,10 @@ if 'Complaint type' in data.columns and 'Coverage level' in data.columns:
     filtered_data = data[data['Coverage level'].isin(top_10_coverage_levels)]
     complaint_coverage_pivot = filtered_data.pivot_table(index='Complaint type', columns='Coverage level', aggfunc='size', fill_value=0)
     fig, ax = plt.subplots(figsize=(8, 5))
-    sns.heatmap(complaint_coverage_pivot, annot=True, fmt='d', cmap='viridis', ax=ax)
+    colors = ["red", "green"]
+    cmap_red_green = LinearSegmentedColormap.from_list("RdGnCustom", colors, N=256) # N=256 for smooth gradient
+    sns.heatmap(complaint_coverage_pivot, annot=True, fmt='d', cmap=cmap_red_green, ax=ax)
+    #sns.heatmap(complaint_coverage_pivot, annot=True, fmt='d', cmap='viridis', ax=ax)
     #ax.set_title('Heatmap of Complaint Type vs Coverage Level', fontsize=16)
     ax.set_xlabel('Coverage Level', fontsize=8)
     ax.set_ylabel('Complaint Type', fontsize=8)
