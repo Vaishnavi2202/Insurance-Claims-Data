@@ -117,7 +117,7 @@ if 'Complaint type' in data.columns:
     reason_complaint_pivot = filtered_data.pivot_table(index='Complaint type', columns='Complaint filed against', aggfunc='size', fill_value=0)
     reason_complaint_pivot = reason_complaint_pivot[top_10_complaints]  # Ensure the columns are in the same order as the top 10 complaints
     reason_complaint_pivot = reason_complaint_pivot.loc[top_10_reasons]  # Ensure the index is in the same order as the top 10 reasons
-    fig, ax = plt.subplots(figsize=(11, 8))
+    fig, ax = plt.subplots(figsize=(10, 6))
     reason_complaint_pivot.plot(kind='bar', stacked=True, ax=ax, color=sns.color_palette('viridis', len(top_10_complaints)))
     #ax.set_title('Grouped Bar Chart of Reasons for Complaints Filed', fontsize=16)
     ax.set_xlabel('Complaint Type', fontsize=12)  # Increased font size
@@ -164,7 +164,7 @@ if 'Complaint type' in data.columns and 'Coverage level' in data.columns:
     top_10_coverage_levels = data['Coverage level'].value_counts().nlargest(10).index
     filtered_data = data[data['Coverage level'].isin(top_10_coverage_levels)]
     complaint_coverage_pivot = filtered_data.pivot_table(index='Complaint type', columns='Coverage level', aggfunc='size', fill_value=0)
-    fig, ax = plt.subplots(figsize=(10, 7))
+    fig, ax = plt.subplots(figsize=(9, 6))
     sns.heatmap(complaint_coverage_pivot, annot=True, fmt='d', cmap='viridis', ax=ax)
     #ax.set_title('Heatmap of Complaint Type vs Coverage Level', fontsize=16)
     ax.set_xlabel('Coverage Level', fontsize=10)
@@ -179,12 +179,12 @@ if 'Received date' in data.columns:
     data['Received date'] = pd.to_datetime(data['Received date'], format='%m/%d/%Y')
     data['Month'] = data['Received date'].dt.month
     complaints_by_month = data['Month'].value_counts().sort_index()
-    fig, ax = plt.subplots(figsize=(10, 7))
+    fig, ax = plt.subplots(figsize=(8, 5))
     colors = sns.color_palette('husl', 12)  # Use a different color for each bar
     bars = ax.bar(complaints_by_month.index, complaints_by_month.values, color=colors)
     #ax.set_title('Complaints Received by Month', fontsize=16)
-    ax.set_xlabel('Month', fontsize=12)
-    ax.set_ylabel('Number of Complaints', fontsize=12)
+    ax.set_xlabel('Month', fontsize=10)
+    ax.set_ylabel('Number of Complaints', fontsize=10)
     ax.set_xticks(range(1, 13))
     ax.set_xticklabels(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], rotation=45)
     #ax.bar_label(bars, fontsize=12)  # Add count on the bars with specified font size
