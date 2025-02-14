@@ -52,7 +52,8 @@ st.write('### Data size after cleaning:')
 st.write(data.shape)
 # Display the number of unique categories in each column
 st.write('### Number of Unique Categories in Each Column:')
-unique_counts = data.nunique()
+unique_counts = data1.nunique()
+unique_counts.columns = ['Field','Count']
 st.write(unique_counts)
 #with col1:
 # Draw a graph for complaints filed against a specific column (assuming 'Complaint filed against' column exists)
