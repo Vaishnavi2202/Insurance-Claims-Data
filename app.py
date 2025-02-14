@@ -130,17 +130,6 @@ if 'Complaint type' in data.columns:
 else:
     st.write('The column "Reason complaint filed" does not exist in the dataset.')
 
-# Display the top 10 highest "Complaints filed against" and the average number of days between received and closed dates
-st.write('### Top 10 Highest Complaints Filed Against and Average Days to Close:')
-top_10_complaints = data['Complaint filed against'].value_counts().nlargest(10).index
-complaint_counts = data['Complaint filed against'].value_counts().reset_index()
-complaint_counts.columns = ['Complaint Filed Against', 'Number of Complaints']
-avg_days_to_close = data[data['Complaint filed against'].isin(top_10_complaints)].groupby('Complaint filed against')['Days to Close'].mean().reset_index()
-avg_days_to_close.columns = ['Complaint Filed Against', 'Average Days to Close']
-merged_data = pd.merge(complaint_counts, avg_days_to_close, on='Complaint Filed Against')
-sorted_data = merged_data.sort_values(by='Number of Complaints', ascending=False)
-st.write(sorted_data)
-
 # Draw a grouped bar chart for the column 'Complaint filed against' vs 'Coverage type'
 if 'Complaint filed against' in data.columns and 'Coverage type' in data.columns:
     st.write('### Complaints Filed Against vs Coverage Type:')
@@ -195,6 +184,19 @@ if 'Received date' in data.columns:
     st.pyplot(fig)
 else:
     st.write('The column "Received date" does not exist in the dataset.')
+
+# Display the top 10 highest "Complaints filed against" and the average number of days between received and closed dates
+st.write('### Top 10 Highest Complaints Filed Against and Average Days to Close:')
+top_10_complaints = data['Complaint filed against'].value_counts().nlargest(10).index
+complaint_counts = data['Complaint filed against'].value_counts().reset_index()
+complaint_counts.columns = ['Complaint Filed Against', 'Number of Complaints']
+avg_days_to_close = data[data['Complaint filed against'].isin(top_10_complaints)].groupby('Complaint filed against')['Days to Close'].mean().reset_index()
+avg_days_to_close.columns = ['Complaint Filed Against', 'Average Days to Close']
+merged_data = pd.merge(complaint_counts, avg_days_to_close, on='Complaint Filed Against')
+sorted_data = merged_data.sort_values(by='Number of Complaints', ascending=False)
+st.write(sorted_data)
+
+
 
 # List the top 5 highest "Respondent Role"
 if 'Respondent Role' in data.columns:
