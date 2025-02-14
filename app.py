@@ -100,8 +100,8 @@ if 'Complaint filed against' in data.columns:
 else:
         st.write('The column "Complaint filed against" does not exist in the dataset.')
 
-st.markdown('<p style="font-size:18px;">We see that Progressive County Mutual Insurance Company followed by State Farm Mutual Automobile Insurance Company have highest complaints. 
-                                        We also see considerable number of complaints against Blue Cross and Blue Shield of Texas. </p>', unsafe_allow_html=True)
+st.markdown('<p style="font-size:18px;">We see that Progressive County Mutual Insurance Company followed by State Farm Mutual Automobile Insurance Company have highest complaints.</p>', unsafe_allow_html=True)
+st.markdown('<p style="font-size:18px;">We also see considerable number of complaints against Blue Cross and Blue Shield of Texas. </p>', unsafe_allow_html=True)
 
 
 # Draw a grouped bar chart for the top 10 highest "Complaints filed against" vs top 5 "Complaints filed by"
