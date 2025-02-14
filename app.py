@@ -50,13 +50,10 @@ st.write(data2.shape)
 
 st.write('### Data size after cleaning:')
 st.write(data.shape)
-# Display the basic stats
-#st.write('Basic Statistics:')
-#st.write(data.describe())
-
-# Draw the first two graphs side by side
-#col1, col2 = st.columns(2)
-
+# Display the number of unique categories in each column
+st.write('### Number of Unique Categories in Each Column:')
+unique_counts = data.nunique()
+st.write(unique_counts)
 #with col1:
 # Draw a graph for complaints filed against a specific column (assuming 'Complaint filed against' column exists)
 if 'Complaint filed against' in data.columns:
