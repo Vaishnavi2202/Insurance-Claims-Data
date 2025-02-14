@@ -24,15 +24,16 @@ data1 = data1.dropna().reset_index(drop=True)
 # Clean the 'Reason complaint filed' and 'How resolved' columns by removing anything after the first semicolon
 data1['Reason complaint filed'] = data1['Reason complaint filed'].apply(lambda x: x.split(';')[0] if pd.notnull(x) else x)
 data1['How resolved'] = data1['How resolved'].apply(lambda x: x.split(';')[0] if pd.notnull(x) else x)
-
-
+# Clean the 'Complaint filed against' column by converting all text to uppercase
+data1['Complaint filed against'] = data1['Complaint filed against'].str.upper()
+# Remove rows where 'Complaint filed against' is 'UNKNOWN'
+data1 = data1[data1['Complaint filed against'] != 'UNKNOWN']
+#Copy of data.
 data = data1.iloc[-50000:]
 
 # Clean the 'Complaint filed against' column by converting all text to uppercase
 data['Complaint filed against'] = data['Complaint filed against'].str.upper()
 
-# Clean the 'Reason complaint filed' column by removing anything after the first semicolon
-data['Reason complaint filed'] = data['Reason complaint filed'].apply(lambda x: x.split(';')[0] if pd.notnull(x) else x)
 
 # Convert date columns to datetime with the correct format
 data['Received date'] = pd.to_datetime(data['Received date'], format='%m/%d/%Y')
