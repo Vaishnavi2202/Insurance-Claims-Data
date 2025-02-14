@@ -156,6 +156,15 @@ if 'Received date' in data.columns:
 else:
     st.write('The column "Received date" does not exist in the dataset.')
 
+# List the top 5 highest "Respondent Role"
+if 'Respondent Role' in data.columns:
+    st.write('### Top 5 Highest Respondent Role:')
+    top_5_respondent_role = data['Respondent Role'].value_counts().nlargest(5)
+    st.write(top_5_respondent_role)
+else:
+    st.write('The column "Respondent Role" does not exist in the dataset.')
+
+
 # Convert date columns to ordinal for model training
 data['Received date'] = data['Received date'].map(pd.Timestamp.toordinal)
 data['Closed date'] = data['Closed date'].map(pd.Timestamp.toordinal)
