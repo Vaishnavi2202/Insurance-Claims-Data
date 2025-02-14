@@ -22,7 +22,7 @@ data1 = data2.drop(columns=columns_to_drop)
 # Remove rows with null values
 data1 = data1.dropna().reset_index(drop=True)
 
-data = data1.iloc[:50000]
+data = data1.iloc[-50000:]
 
 # Clean the 'Complaint filed against' column by converting all text to uppercase
 data['Complaint filed against'] = data['Complaint filed against'].str.upper()
