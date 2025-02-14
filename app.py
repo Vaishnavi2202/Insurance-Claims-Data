@@ -16,8 +16,8 @@ data_url = f'https://drive.google.com/uc?id={file_id}'
 data2 = pd.read_csv(data_url)
 
 # Convert 'complaint number' and 'respondent ID' to integers
-data2['Complaint number'] = data2['Complaint number'].astype(int)
-data2['Respondent ID'] = data2['Respondent ID'].astype(int)
+data2['Complaint number'] = data2['Complaint number'].astype(str).str.replace(',', '', regex=False)
+data2['Respondent ID'] = data2['Respondent ID'].astype(str).str.replace(',', '', regex=False)
 
 # Drop the specified columns
 columns_to_drop = ['Complaint number', 'Confirmed complaint', 'Keywords', 'Others involved']
