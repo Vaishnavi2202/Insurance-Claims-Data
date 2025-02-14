@@ -45,10 +45,10 @@ st.title('The Claim Game')
 st.write('### Sample data from Original File:')
 st.write(data2.head(20))
 
-st.write('### Shape of Data before data cleaning:')
+st.write('### Size of Raw Data:')
 st.write(data2.shape)
 
-st.write('### Shape of data after data cleaning:')
+st.write('### Data size after cleaning:')
 st.write(data.shape)
 # Display the basic stats
 #st.write('Basic Statistics:')
