@@ -45,7 +45,7 @@ data['Days to Close'] = (data['Closed date'] - data['Received date']).dt.days
 data['Month'] = data['Received date'].dt.month
 
 # Display the title of the app
-st.title('The Claim Game')
+st.title("The Claims' Analysis")
 st.write('### Sample data from Original File:')
 st.write(data2.tail(20))
 
