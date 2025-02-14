@@ -101,7 +101,7 @@ if 'Complaint filed against' in data.columns and 'Complaint filed by' in data.co
     top_5_complaints_by = data['Complaint filed by'].value_counts().nlargest(5).index
     filtered_data = data[data['Complaint filed against'].isin(top_10_complaints) & data['Complaint filed by'].isin(top_5_complaints_by)]
     complaint_pivot = filtered_data.pivot_table(index='Complaint filed against', columns='Complaint filed by', aggfunc='size', fill_value=0)
-    fig, ax = plt.subplots(figsize=(14, 11))
+    fig, ax = plt.subplots(figsize=(12, 9))
     complaint_pivot.plot(kind='bar', stacked=True, ax=ax, color=sns.color_palette('viridis', len(top_5_complaints_by)))
     ax.set_title('Top 10 Highest Complaints Filed Against vs Top 5 Complaints Filed By', fontsize=16)
     ax.set_xlabel('Complaint Filed Against', fontsize=14)
@@ -113,27 +113,6 @@ if 'Complaint filed against' in data.columns and 'Complaint filed by' in data.co
 else:
     st.write('The columns "Complaint filed against" and/or "Complaint filed by" do not exist in the dataset.')
 
-# Draw a pie chart for complaints filed by a specific column (assuming 'Complaint filed by' column exists)
-if 'Complaint filed by' in data.columns:
-        st.write('### Pie chart representing Complaints Filed By:')
-        top_5_complaints_by = data['Complaint filed by'].value_counts().nlargest(5)
-        
-        def func(pct, allvals):
-            absolute = int(pct/100.*sum(allvals))
-            return f"{pct:.1f}%\n({absolute:d})"
-        
-        fig, ax = plt.subplots(figsize=(3, 3))  # Reduced the size of the pie chart
-        wedges, texts, autotexts = ax.pie(top_5_complaints_by, labels=top_5_complaints_by.index, autopct=lambda pct: func(pct, top_5_complaints_by), startangle=90, colors=sns.color_palette('viridis', len(top_5_complaints_by)))
-        ax.set_title('Top 5 Categories of Complaints Filed By', fontsize=6)  # Reduced the font size of the title
-        ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-        for text in texts:
-            text.set_fontsize(6)  # Reduce the font size of the labels around the pie chart
-        for autotext in autotexts:
-            autotext.set_fontsize(5)  # Reduce the font size of the numbers inside the pie chart
-        ax.legend(wedges, top_5_complaints_by.index, title="Categories", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
-        st.pyplot(fig)
-else:
-        st.write('The column "Complaint filed by" does not exist in the dataset.')
 
 # Draw a grouped bar chart for the column 'Reason complaint filed' (assuming it exists)
 if 'Complaint type' in data.columns:
