@@ -131,7 +131,7 @@ if 'Complaint type' in data.columns and 'Coverage level' in data.columns:
     ax.set_title('Heatmap of Complaint Type vs Coverage Level', fontsize=16)
     ax.set_xlabel('Coverage Level', fontsize=14)
     ax.set_ylabel('Complaint Type', fontsize=14)
-    ax.set_xticks(rotation = 45)
+    ax.set_xticklabels(rotation=45)
     st.pyplot(fig)
 else:
     st.write('The columns "Complaint type" and/or "Coverage level" do not exist in the dataset.')
