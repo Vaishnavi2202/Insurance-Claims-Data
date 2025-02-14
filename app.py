@@ -46,8 +46,9 @@ data['Days to Close'] = (data['Closed date'] - data['Received date']).dt.days
 data['Month'] = data['Received date'].dt.month
 
 # Display the title of the app
-st.title("The Claims' Analysis")
+st.title("TDI Complaint Data Analysis: Exploring Trends and Patterns")
 st.markdown('<p style="font-size:18px;">The data analyzed is sourced from Data.Gov.</p>', unsafe_allow_html=True)
+st.markdown('<p style="font-size:18px;">The Texas Department of Insurance (TDI) handles complaints against people and organizations licensed by TDI, such as companies, agents, and adjusters.</p>', unsafe_allow_html=True)
 
 st.write('### Sample data from Original File:')
 st.write(data2.tail(20))
