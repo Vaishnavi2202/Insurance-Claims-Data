@@ -59,6 +59,7 @@ if 'Confirmed complaint' in data2.columns:
 else:
     st.write('The column "Confirmed complaint" does not exist in the dataset.')
 
+st.markdown('<p style="font-size:18px;">Notes:</p>', unsafe_allow_html=True)
 st.markdown('<p style="font-size:18px;">1. We observe unclean data in columns How Resolved and Reason for Complaint.</p>', unsafe_allow_html=True)
 st.markdown('<p style="font-size:18px;">2. The categories Others in Complaint Filed by and Miscellaneous in Coverage type lack specificity, making the data less precise and harder to analyze.</p>', unsafe_allow_html=True)
 st.markdown('<p style="font-size:18px;">3. Confirmed complaints are fewer than unconfirmed complaints.</p>', unsafe_allow_html=True)
