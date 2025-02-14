@@ -18,7 +18,7 @@ data2 = pd.read_csv(data_url)
 # Convert 'complaint number' and 'respondent ID' to integers
 data2['Complaint number'] = data2['Complaint number'].astype(str).str.replace(',', '', regex=False)
 data2['Respondent ID'] = data2['Respondent ID'].astype(str).str.replace(',', '', regex=False)
-data2 = data2.iloc[:, 1:]
+
 # Drop the specified columns
 columns_to_drop = ['Complaint number', 'Confirmed complaint', 'Keywords', 'Others involved']
 data1 = data2.drop(columns=columns_to_drop)
