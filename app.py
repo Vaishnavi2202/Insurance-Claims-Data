@@ -47,6 +47,8 @@ data['Month'] = data['Received date'].dt.month
 
 # Display the title of the app
 st.title("The Claims' Analysis")
+st.markdown('<p style="font-size:18px;">**Note:** The data for analysis is taken from Data.Gov.</p>', unsafe_allow_html=True)
+
 st.write('### Sample data from Original File:')
 st.write(data2.tail(20))
 
