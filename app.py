@@ -100,10 +100,10 @@ if 'Complaint filed against' in data.columns and 'Complaint filed by' in data.co
     fig, ax = plt.subplots(figsize=(9, 6))
     complaint_pivot.plot(kind='bar', stacked=True, ax=ax, color=sns.color_palette('viridis', len(top_5_complaints_by)))
     #ax.set_title('Top 10 Highest Complaints Filed Against vs Top 5 Complaints Filed By', fontsize=16)
-    ax.set_xlabel('Complaint Filed Against', fontsize=12)
-    ax.set_ylabel('Number of Complaints', fontsize=12)
-    ax.tick_params(axis='y', labelsize=10)
-    ax.tick_params(axis='x', labelsize=10)
+    ax.set_xlabel('Complaint Filed Against', fontsize=10)
+    ax.set_ylabel('Number of Complaints', fontsize=10)
+    ax.tick_params(axis='y', labelsize=8)
+    ax.tick_params(axis='x', labelsize=8)
     ax.legend(title='Complaint Filed By', bbox_to_anchor=(1.05, 1), loc='upper left')
     st.pyplot(fig)
 else:
@@ -117,13 +117,13 @@ if 'Complaint type' in data.columns:
     reason_complaint_pivot = filtered_data.pivot_table(index='Complaint type', columns='Complaint filed against', aggfunc='size', fill_value=0)
     reason_complaint_pivot = reason_complaint_pivot[top_10_complaints]  # Ensure the columns are in the same order as the top 10 complaints
     reason_complaint_pivot = reason_complaint_pivot.loc[top_10_reasons]  # Ensure the index is in the same order as the top 10 reasons
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(9, 6))
     reason_complaint_pivot.plot(kind='bar', stacked=True, ax=ax, color=sns.color_palette('viridis', len(top_10_complaints)))
     #ax.set_title('Grouped Bar Chart of Reasons for Complaints Filed', fontsize=16)
-    ax.set_xlabel('Complaint Type', fontsize=12)  # Increased font size
-    ax.set_ylabel('Number of Complaints', fontsize=12)  # Increased font size
-    ax.tick_params(axis='y', labelsize=10)
-    ax.tick_params(axis='x', labelsize=10)
+    ax.set_xlabel('Complaint Type', fontsize=10)  # Increased font size
+    ax.set_ylabel('Number of Complaints', fontsize=10)  # Increased font size
+    ax.tick_params(axis='y', labelsize=8)
+    ax.tick_params(axis='x', labelsize=8)
     ax.legend(title='Complaint Filed Against', bbox_to_anchor=(1.05, 1), loc='upper left')
     st.pyplot(fig)
 else:
@@ -149,10 +149,10 @@ if 'Complaint filed against' in data.columns and 'Coverage type' in data.columns
     fig, ax = plt.subplots(figsize=(9, 6))
     complaint_coverage_pivot.plot(kind='bar', stacked=True, ax=ax, color=sns.color_palette('viridis', len(filtered_data['Coverage type'].unique())))
     #ax.set_title('Complaints Filed Against vs Coverage Type', fontsize=16)
-    ax.set_xlabel('Complaint Filed Against', fontsize=12)
-    ax.set_ylabel('Number of Complaints', fontsize=12)
-    ax.tick_params(axis='y', labelsize=10)
-    ax.tick_params(axis='x', labelsize=10)
+    ax.set_xlabel('Complaint Filed Against', fontsize=10)
+    ax.set_ylabel('Number of Complaints', fontsize=10)
+    ax.tick_params(axis='y', labelsize=8)
+    ax.tick_params(axis='x', labelsize=8)
     ax.legend(title='Coverage Type', bbox_to_anchor=(1.05, 1), loc='upper left')
     st.pyplot(fig)
 else:
@@ -164,11 +164,11 @@ if 'Complaint type' in data.columns and 'Coverage level' in data.columns:
     top_10_coverage_levels = data['Coverage level'].value_counts().nlargest(10).index
     filtered_data = data[data['Coverage level'].isin(top_10_coverage_levels)]
     complaint_coverage_pivot = filtered_data.pivot_table(index='Complaint type', columns='Coverage level', aggfunc='size', fill_value=0)
-    fig, ax = plt.subplots(figsize=(9, 6))
+    fig, ax = plt.subplots(figsize=(8, 5))
     sns.heatmap(complaint_coverage_pivot, annot=True, fmt='d', cmap='viridis', ax=ax)
     #ax.set_title('Heatmap of Complaint Type vs Coverage Level', fontsize=16)
-    ax.set_xlabel('Coverage Level', fontsize=10)
-    ax.set_ylabel('Complaint Type', fontsize=10)
+    ax.set_xlabel('Coverage Level', fontsize=8)
+    ax.set_ylabel('Complaint Type', fontsize=8)
     st.pyplot(fig)
 else:
     st.write('The columns "Complaint type" and/or "Coverage level" do not exist in the dataset.')
