@@ -13,16 +13,16 @@ st.set_page_config(layout="wide")
 # Load the data from Google Drive
 file_id = '1-uHj-17MQA6_DuNT9DKKU17opybldZpJ'  # Replace with your actual file ID
 data_url = f'https://drive.google.com/uc?id={file_id}'
-data1 = pd.read_csv(data_url, nrows=100000)
+data2 = pd.read_csv(data_url)
 
 # Drop the specified columns
 columns_to_drop = ['Complaint number', 'Confirmed complaint', 'Keywords', 'Others involved']
-data1 = data1.drop(columns=columns_to_drop)
+data1 = data2.drop(columns=columns_to_drop)
 
 # Remove rows with null values
-data1 = data1.dropna().reset_index(drop=True)
+data1 = data2.dropna().reset_index(drop=True)
 
-data = data1.copy()
+data = data1.iloc[:50000]
 
 # Clean the 'Complaint filed against' column by converting all text to uppercase
 data['Complaint filed against'] = data['Complaint filed against'].str.upper()
@@ -43,10 +43,10 @@ data['Month'] = data['Received date'].dt.month
 # Display the title of the app
 st.title('The Claim Game')
 st.write('### Sample data:')
-st.write(data1.head(20))
+st.write(data2.head(20))
 
 st.write('### Shape of Data before data cleaning:')
-st.write(data1.shape)
+st.write(data2.shape)
 
 st.write('### Shape of data after data cleaning:')
 st.write(data.shape)
