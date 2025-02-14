@@ -197,16 +197,6 @@ sorted_data = merged_data.sort_values(by='Number of Complaints', ascending=False
 st.write(sorted_data)
 
 
-
-# List the top 5 highest "Respondent Role"
-if 'Respondent Role' in data.columns:
-    st.write('### Top 5 Respondent Roles:')
-    top_5_respondent_role = data['Respondent Role'].value_counts().nlargest(5)
-    st.write(top_5_respondent_role)
-else:
-    st.write('The column "Respondent Role" does not exist in the dataset.')
-
-
 # Convert date columns to ordinal for model training
 data['Received date'] = data['Received date'].map(pd.Timestamp.toordinal)
 data['Closed date'] = data['Closed date'].map(pd.Timestamp.toordinal)
