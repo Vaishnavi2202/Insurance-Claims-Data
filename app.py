@@ -13,15 +13,16 @@ st.set_page_config(layout="wide")
 # Load the data from Google Drive
 file_id = '1-uHj-17MQA6_DuNT9DKKU17opybldZpJ'  # Replace with your actual file ID
 data_url = f'https://drive.google.com/uc?id={file_id}'
-data = pd.read_csv(data_url, nrows=100000)
+data1 = pd.read_csv(data_url, nrows=100000)
 
 # Drop the specified columns
 columns_to_drop = ['Complaint number', 'Confirmed complaint', 'Keywords', 'Others involved']
-data = data.drop(columns=columns_to_drop)
+data1 = data1.drop(columns=columns_to_drop)
 
 # Remove rows with null values
-data = data.dropna().reset_index(drop=True)
+data1 = data1.dropna().reset_index(drop=True)
 
+data = data1.copy()
 # Clean the 'Complaint filed against' column by converting all text to uppercase
 data['Complaint filed against'] = data['Complaint filed against'].str.upper()
 
