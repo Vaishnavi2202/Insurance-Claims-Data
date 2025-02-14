@@ -69,15 +69,21 @@ st.write(data2.shape)
 
 st.write('### Data size after cleaning:')
 st.write(data.shape)
+
+st.markdown('<p style="font-size:18px;">Columns were eliminated if they contained more null values than valid data points. Additionally, rows with any null values were also removed.</p>', unsafe_allow_html=True)
+
 # Display the number of unique categories in each column
 st.write('### Number of Unique Categories in Each Column:')
 unique_counts = data1.nunique().reset_index()
 unique_counts.columns = ['Field','Count']
 st.write(unique_counts)
-#with col1:
+
+st.markdown('<p style="font-size:18px;">If the data had a smaller number of categories for Reason Complaint filed, it would be easier to translate the analysis into actionable insights and targeted improvements. bet.</p>', unsafe_allow_html=True)
+
+
 # Draw a graph for complaints filed against a specific column (assuming 'Complaint filed against' column exists)
 if 'Complaint filed against' in data.columns:
-        st.write('### Agencies with the Most Complaints Filed Against Them:')
+        st.write('### Companies with the Most Complaints Filed Against Them:')
         top_10_complaints = data['Complaint filed against'].value_counts().nlargest(10).index
         filtered_data = data[data['Complaint filed against'].isin(top_10_complaints)]
         fig, ax = plt.subplots(figsize=(20, 20))
@@ -103,7 +109,7 @@ if 'Complaint filed against' in data.columns and 'Complaint filed by' in data.co
     complaint_pivot = filtered_data.pivot_table(index='Complaint filed against', columns='Complaint filed by', aggfunc='size', fill_value=0)
     fig, ax = plt.subplots(figsize=(12, 9))
     complaint_pivot.plot(kind='bar', stacked=True, ax=ax, color=sns.color_palette('viridis', len(top_5_complaints_by)))
-    ax.set_title('Top 10 Highest Complaints Filed Against vs Top 5 Complaints Filed By', fontsize=16)
+    #ax.set_title('Top 10 Highest Complaints Filed Against vs Top 5 Complaints Filed By', fontsize=16)
     ax.set_xlabel('Complaint Filed Against', fontsize=14)
     ax.set_ylabel('Number of Complaints', fontsize=14)
     ax.tick_params(axis='y', labelsize=12)
@@ -114,9 +120,9 @@ else:
     st.write('The columns "Complaint filed against" and/or "Complaint filed by" do not exist in the dataset.')
 
 
-# Draw a grouped bar chart for the column 'Reason complaint filed' (assuming it exists)
+# Draw a grouped bar chart for the column 'Complaint Type' (assuming it exists)
 if 'Complaint type' in data.columns:
-    st.write('### Reasons for Complaints Filed:')
+    st.write('### Complaints filed against vs Complaint Type:')
     top_10_reasons = data['Complaint type'].value_counts().nlargest(7).index
     filtered_data = data[data['Complaint type'].isin(top_10_reasons)]
     reason_complaint_pivot = filtered_data.pivot_table(index='Complaint type', columns='Complaint filed against', aggfunc='size', fill_value=0)
@@ -124,8 +130,8 @@ if 'Complaint type' in data.columns:
     reason_complaint_pivot = reason_complaint_pivot.loc[top_10_reasons]  # Ensure the index is in the same order as the top 10 reasons
     fig, ax = plt.subplots(figsize=(14, 11))
     reason_complaint_pivot.plot(kind='bar', stacked=True, ax=ax, color=sns.color_palette('viridis', len(top_10_complaints)))
-    ax.set_title('Grouped Bar Chart of Reasons for Complaints Filed', fontsize=16)
-    ax.set_xlabel('Reason Complaint Filed', fontsize=18)  # Increased font size
+    #ax.set_title('Grouped Bar Chart of Reasons for Complaints Filed', fontsize=16)
+    ax.set_xlabel('Complaint Type', fontsize=18)  # Increased font size
     ax.set_ylabel('Number of Complaints', fontsize=18)  # Increased font size
     ax.tick_params(axis='y', labelsize=16)
     ax.tick_params(axis='x', labelsize=16)
@@ -147,13 +153,13 @@ st.write(sorted_data)
 
 # Analyze the relationship between Complaint type and Coverage level
 if 'Complaint type' in data.columns and 'Coverage level' in data.columns:
-    st.write('### Relationship between Complaint Type and Coverage Level:')
+    st.write('### Heatmap to understand relation between Complaint Type and Coverage Level:')
     top_10_coverage_levels = data['Coverage level'].value_counts().nlargest(10).index
     filtered_data = data[data['Coverage level'].isin(top_10_coverage_levels)]
     complaint_coverage_pivot = filtered_data.pivot_table(index='Complaint type', columns='Coverage level', aggfunc='size', fill_value=0)
     fig, ax = plt.subplots(figsize=(14, 11))
     sns.heatmap(complaint_coverage_pivot, annot=True, fmt='d', cmap='viridis', ax=ax)
-    ax.set_title('Heatmap of Complaint Type vs Coverage Level', fontsize=16)
+    #ax.set_title('Heatmap of Complaint Type vs Coverage Level', fontsize=16)
     ax.set_xlabel('Coverage Level', fontsize=14)
     ax.set_ylabel('Complaint Type', fontsize=14)
     st.pyplot(fig)
@@ -169,7 +175,7 @@ if 'Received date' in data.columns:
     fig, ax = plt.subplots(figsize=(14, 7))
     colors = sns.color_palette('husl', 12)  # Use a different color for each bar
     bars = ax.bar(complaints_by_month.index, complaints_by_month.values, color=colors)
-    ax.set_title('Complaints Received by Month', fontsize=16)
+    #ax.set_title('Complaints Received by Month', fontsize=16)
     ax.set_xlabel('Month', fontsize=14)
     ax.set_ylabel('Number of Complaints', fontsize=14)
     ax.set_xticks(range(1, 13))
