@@ -123,9 +123,10 @@ if 'Complaint filed against' in data.columns and 'Complaint filed by' in data.co
 else:
     st.write('The columns "Complaint filed against" and/or "Complaint filed by" do not exist in the dataset.')
 
-st.markdown('<p style="font-size:18px;">Insured and Third Party are consistently significant sources of complaints across most companies. The dark blue (Insured) and light green (Third Party) segments of the bars are generally quite prominent for almost all companies, indicating these two groups are major drivers of complaints.</p>', unsafe_allow_html=True)
-st.markdown('<p style="font-size:18px;">Attorney and Other categories appear to be the smallest contributors to complaints.</p>', unsafe_allow_html=True)
-st.markdown('<p style="font-size:18px;">Blue Cross and Blue Shield of Texas: Seems to have a particularly high proportion of Provider complaints compared to some other companies, suggesting potential issues related to provider relationships or claims processing.</p>', unsafe_allow_html=True)
+st.markdown('<p style="font-size:18px;">Notes:</p>', unsafe_allow_html=True)
+st.markdown('<p style="font-size:18px;">1. Insured and Third Party are consistently significant sources of complaints across most companies. The dark blue (Insured) and light green (Third Party) segments of the bars are generally quite prominent for almost all companies, indicating these two groups are major drivers of complaints.</p>', unsafe_allow_html=True)
+st.markdown('<p style="font-size:18px;">2. Attorney and Other categories appear to be the smallest contributors to complaints.</p>', unsafe_allow_html=True)
+st.markdown('<p style="font-size:18px;">3. Blue Cross and Blue Shield of Texas: Seems to have a particularly high proportion of Provider complaints compared to some other companies, suggesting potential issues related to provider relationships or claims processing.</p>', unsafe_allow_html=True)
 
 # Draw a grouped bar chart for the column 'Complaint Type' (assuming it exists)
 if 'Complaint type' in data.columns:
@@ -157,6 +158,25 @@ avg_days_to_close.columns = ['Complaint Filed Against', 'Average Days to Close']
 merged_data = pd.merge(complaint_counts, avg_days_to_close, on='Complaint Filed Against')
 sorted_data = merged_data.sort_values(by='Number of Complaints', ascending=False)
 st.write(sorted_data)
+
+# Draw a grouped bar chart for the column 'Complaint filed against' vs 'Coverage type'
+if 'Complaint filed against' in data.columns and 'Coverage type' in data.columns:
+    st.write('### Complaints Filed Against vs Coverage Type:')
+    top_10_complaints = data['Complaint filed against'].value_counts().nlargest(10).index
+    filtered_data = data[data['Complaint filed against'].isin(top_10_complaints)]
+    complaint_coverage_pivot = filtered_data.pivot_table(index='Complaint filed against', columns='Coverage type', aggfunc='size', fill_value=0)
+    fig, ax = plt.subplots(figsize=(12, 9))
+    complaint_coverage_pivot.plot(kind='bar', stacked=True, ax=ax, color=sns.color_palette('viridis', len(filtered_data['Coverage type'].unique())))
+    #ax.set_title('Complaints Filed Against vs Coverage Type', fontsize=16)
+    ax.set_xlabel('Complaint Filed Against', fontsize=14)
+    ax.set_ylabel('Number of Complaints', fontsize=14)
+    ax.tick_params(axis='y', labelsize=12)
+    ax.tick_params(axis='x', labelsize=12)
+    ax.legend(title='Coverage Type', bbox_to_anchor=(1.05, 1), loc='upper left')
+    st.pyplot(fig)
+else:
+    st.write('The columns "Complaint filed against" and/or "Coverage type" do not exist in the dataset.')
+
 
 # Analyze the relationship between Complaint type and Coverage level
 if 'Complaint type' in data.columns and 'Coverage level' in data.columns:
