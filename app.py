@@ -123,6 +123,9 @@ if 'Complaint filed against' in data.columns and 'Complaint filed by' in data.co
 else:
     st.write('The columns "Complaint filed against" and/or "Complaint filed by" do not exist in the dataset.')
 
+st.markdown('<p style="font-size:18px;">Insured and Third Party are consistently significant sources of complaints across most companies. The dark blue (Insured) and light green (Third Party) segments of the bars are generally quite prominent for almost all companies, indicating these two groups are major drivers of complaints.</p>', unsafe_allow_html=True)
+st.markdown('<p style="font-size:18px;">Attorney and Other categories appear to be the smallest contributors to complaints.</p>', unsafe_allow_html=True)
+st.markdown('<p style="font-size:18px;">Blue Cross and Blue Shield of Texas: Seems to have a particularly high proportion of Provider complaints compared to some other companies, suggesting potential issues related to provider relationships or claims processing.</p>', unsafe_allow_html=True)
 
 # Draw a grouped bar chart for the column 'Complaint Type' (assuming it exists)
 if 'Complaint type' in data.columns:
