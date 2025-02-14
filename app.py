@@ -42,9 +42,8 @@ data['Month'] = data['Received date'].dt.month
 
 # Display the title of the app
 st.title('The Claim Game')
-st.write('### Sample data:')
+st.write('### Sample data from Original File:')
 st.write(data2.head(20))
-st.write(data.head(5))
 
 st.write('### Shape of Data before data cleaning:')
 st.write(data2.shape)
