@@ -47,10 +47,21 @@ data['Month'] = data['Received date'].dt.month
 
 # Display the title of the app
 st.title("The Claims' Analysis")
-st.markdown('<p style="font-size:18px;">**Note:** The data for analysis is taken from Data.Gov.</p>', unsafe_allow_html=True)
+st.markdown('<p style="font-size:18px;">The data analyzed is sourced from Data.Gov.</p>', unsafe_allow_html=True)
 
 st.write('### Sample data from Original File:')
 st.write(data2.tail(20))
+# Display the number of "Yes" and "No" in the "Confirmed complaint" column
+if 'Confirmed complaint' in data2.columns:
+    st.write('### Number of Yes and No in Confirmed Complaint:')
+    confirmed_complaint_counts = data2['Confirmed complaint'].value_counts()
+    st.write(confirmed_complaint_counts)
+else:
+    st.write('The column "Confirmed complaint" does not exist in the dataset.')
+
+st.markdown('<p style="font-size:18px;">1. We observe unclean data in the How Resolved and Reason for Complaint columns.</p>', unsafe_allow_html=True)
+st.markdown('<p style="font-size:18px;">2. The categories Others in Complaint Filed by and Miscellaneous in Coverage type lack specificity, making the data less precise and harder to analyze.</p>', unsafe_allow_html=True)
+st.markdown('<p style="font-size:18px;">3. Confirmed complaints are fewer than unconfirmed complaints.</p>', unsafe_allow_html=True)
 
 st.write('### Size of Raw Data:')
 st.write(data2.shape)
