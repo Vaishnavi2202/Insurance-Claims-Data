@@ -20,7 +20,7 @@ columns_to_drop = ['Complaint number', 'Confirmed complaint', 'Keywords', 'Other
 data1 = data2.drop(columns=columns_to_drop)
 
 # Remove rows with null values
-data1 = data2.dropna().reset_index(drop=True)
+data1 = data1.dropna().reset_index(drop=True)
 
 data = data1.iloc[:50000]
 
