@@ -51,6 +51,13 @@ st.markdown('<p style="font-size:18px;">The Texas Department of Insurance (TDI) 
 
 st.write('### Sample data from Original File:')
 st.write(data2.tail(20))
+
+# Display the number of unique categories in each column
+st.write('### Column Category Cardinality:')
+unique_counts = data1.nunique().reset_index()
+unique_counts.columns = ['Field','Count']
+st.write(unique_counts)
+
 # Display the number of "Yes" and "No" in the "Confirmed complaint" column
 if 'Confirmed complaint' in data2.columns:
     st.write('### Confirmed Complaints counts:')
@@ -59,11 +66,6 @@ if 'Confirmed complaint' in data2.columns:
 else:
     st.write('The column "Confirmed complaint" does not exist in the dataset.')
 
-# Display the number of unique categories in each column
-st.write('### Number of Unique Categories in Each Column:')
-unique_counts = data1.nunique().reset_index()
-unique_counts.columns = ['Field','Count']
-st.write(unique_counts)
 
 # Draw a graph for complaints filed against a specific column (assuming 'Complaint filed against' column exists)
 if 'Complaint filed against' in data.columns:
