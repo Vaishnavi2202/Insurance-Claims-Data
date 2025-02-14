@@ -158,7 +158,7 @@ else:
 
 # List the top 5 highest "Respondent Role"
 if 'Respondent Role' in data.columns:
-    st.write('### Top 5 Highest Respondent Role:')
+    st.write('### Top 5 Respondent Roles:')
     top_5_respondent_role = data['Respondent Role'].value_counts().nlargest(5)
     st.write(top_5_respondent_role)
 else:
