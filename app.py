@@ -21,6 +21,10 @@ data1 = data2.drop(columns=columns_to_drop)
 
 # Remove rows with null values
 data1 = data1.dropna().reset_index(drop=True)
+# Clean the 'Reason complaint filed' and 'How resolved' columns by removing anything after the first semicolon
+data1['Reason complaint filed'] = data1['Reason complaint filed'].apply(lambda x: x.split(';')[0] if pd.notnull(x) else x)
+data1['How resolved'] = data1['How resolved'].apply(lambda x: x.split(';')[0] if pd.notnull(x) else x)
+
 
 data = data1.iloc[-50000:]
 
