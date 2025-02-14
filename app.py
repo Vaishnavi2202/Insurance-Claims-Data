@@ -15,6 +15,10 @@ file_id = '1-uHj-17MQA6_DuNT9DKKU17opybldZpJ'  # Replace with your actual file I
 data_url = f'https://drive.google.com/uc?id={file_id}'
 data2 = pd.read_csv(data_url)
 
+# Convert 'complaint number' and 'respondent ID' to integers
+data2['Complaint number'] = data2['Complaint number'].astype(int)
+data2['Respondent ID'] = data2['Respondent ID'].astype(int)
+
 # Drop the specified columns
 columns_to_drop = ['Complaint number', 'Confirmed complaint', 'Keywords', 'Others involved']
 data1 = data2.drop(columns=columns_to_drop)
