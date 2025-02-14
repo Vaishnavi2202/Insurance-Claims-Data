@@ -76,7 +76,7 @@ if 'Complaint filed against' in data.columns:
         st.write('### Companies with the Most Complaints Filed Against Them:')
         top_10_complaints = data['Complaint filed against'].value_counts().nlargest(10).index
         filtered_data = data[data['Complaint filed against'].isin(top_10_complaints)]
-        fig, ax = plt.subplots(figsize=(16, 16))
+        fig, ax = plt.subplots(figsize=(15, 15))
         sns.countplot(y='Complaint filed against', data=filtered_data, ax=ax, order=top_10_complaints, palette='viridis')
         #ax.set_title('Top 10 Most Complained-About Insurance Agencies', fontsize=20)
         ax.set_xlabel('Number of Complaints', fontsize=15)
@@ -97,7 +97,7 @@ if 'Complaint filed against' in data.columns and 'Complaint filed by' in data.co
     top_5_complaints_by = data['Complaint filed by'].value_counts().nlargest(5).index
     filtered_data = data[data['Complaint filed against'].isin(top_10_complaints) & data['Complaint filed by'].isin(top_5_complaints_by)]
     complaint_pivot = filtered_data.pivot_table(index='Complaint filed against', columns='Complaint filed by', aggfunc='size', fill_value=0)
-    fig, ax = plt.subplots(figsize=(12, 9))
+    fig, ax = plt.subplots(figsize=(10, 7))
     complaint_pivot.plot(kind='bar', stacked=True, ax=ax, color=sns.color_palette('viridis', len(top_5_complaints_by)))
     #ax.set_title('Top 10 Highest Complaints Filed Against vs Top 5 Complaints Filed By', fontsize=16)
     ax.set_xlabel('Complaint Filed Against', fontsize=14)
