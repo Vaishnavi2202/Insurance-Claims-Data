@@ -42,7 +42,7 @@ data['Month'] = data['Received date'].dt.month
 # Display the title of the app
 st.title('The Claim Game')
 st.write('### Sample data:')
-st.write(data.head(20))
+st.write(data1.head(20))
 # Display the basic stats
 #st.write('Basic Statistics:')
 #st.write(data.describe())
