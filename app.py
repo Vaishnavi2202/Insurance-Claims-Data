@@ -23,6 +23,7 @@ data1 = data1.drop(columns=columns_to_drop)
 data1 = data1.dropna().reset_index(drop=True)
 
 data = data1.copy()
+
 # Clean the 'Complaint filed against' column by converting all text to uppercase
 data['Complaint filed against'] = data['Complaint filed against'].str.upper()
 
@@ -43,6 +44,12 @@ data['Month'] = data['Received date'].dt.month
 st.title('The Claim Game')
 st.write('### Sample data:')
 st.write(data1.head(20))
+
+st.write('### Shape of Data before data cleaning:')
+st.write(data1.shape)
+
+st.write('### Shape of data after data cleaning:')
+st.write(data.shape)
 # Display the basic stats
 #st.write('Basic Statistics:')
 #st.write(data.describe())
